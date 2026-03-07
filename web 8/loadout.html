@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>装备搭配推荐</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>装备搭配系统</h1>
+
+预算
+<input id="budget" type="number" value="8000">
+
+<br><br>
+
+主武器
+<select id="weapon"></select>
+
+头盔
+<select id="helmet"></select>
+
+防弹衣
+<select id="armor"></select>
+
+<br><br>
+
+<button onclick="calculateLoadout()">计算装备</button>
+
+<h2 id="result"></h2>
+
+<script src="loadout.js"></script>
+
+</body>
+</html>
