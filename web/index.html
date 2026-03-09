@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Delta Force 战术数据库</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 顶部导航 -->
+<div class="navbar">
+
+<div class="logo">DELTA FORCE DATABASE</div>
+
+<div class="navlinks">
+
+<a href="index.html">首页</a>
+
+<div class="dropdown">
+<button class="dropbtn">武器系统</button>
+<div class="dropdown-content">
+<a href="weapons.html">武器数据库</a>
+<a href="loadout.html">装备搭配</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button class="dropbtn">战术系统</button>
+<div class="dropdown-content">
+<a href="map.html">战术地图</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 首页标题 -->
+<div class="hero">
+
+<h1>Delta Force 战术数据库</h1>
+
+<p>武器 · 装备 · 战术地图</p>
+
+</div>
+
+
+<!-- 功能卡片 -->
+<div class="cards">
+
+<a href="weapons.html" class="card">
+<h2>武器数据库</h2>
+<p>查看所有武器数据与图片</p>
+</a>
+
+<a href="loadout.html" class="card">
+<h2>装备搭配</h2>
+<p>推荐最佳战斗装备组合</p>
+</a>
+
+<a href="map.html" class="card">
+<h2>战术地图</h2>
+<p>查看地图资源与战术点位</p>
+</a>
+
+</div>
+
+<h3>留言板</h3>
+
+<input id="username" placeholder="你的名字">
+
+<br><br>
+
+<textarea id="content" placeholder="留言内容"></textarea>
+
+<br><br>
+
+<button onclick="addMessage()">提交留言</button>
+
+<h4>留言列表</h4>
+
+<div id="messageList"></div>
+
+<script src="js/message.js"></script>
+
+</body>
+</html>

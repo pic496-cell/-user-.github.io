@@ -1,0 +1,559 @@
+body{
+
+margin:0;
+
+font-family:Arial;
+
+background:url("images/a.png") no-repeat center;
+
+background-size:cover;
+
+color:rgb(22, 138, 9);
+
+text-align:center;
+
+}
+
+
+.weapon-page{
+
+background:url("images/b.png") no-repeat center;
+
+background-size:cover;
+
+}
+
+.loadout-page{
+background:url("images/c.png") no-repeat center;
+background-size:cover;
+}
+
+.map-page{
+background:url("images/d.png") no-repeat center;
+background-size:cover;
+}
+
+/* 导航栏 */
+
+.navbar{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:rgba(0,0,0,0.8);
+
+padding:10px 30px;
+
+}
+
+.logo{
+
+font-size:22px;
+
+font-weight:bold;
+
+}
+
+.navlinks a{
+
+color:white;
+
+text-decoration:none;
+
+padding:10px 15px;
+
+}
+
+.navlinks a:hover{
+
+background:#444;
+
+}
+
+
+/* 下拉菜单 */
+
+.dropdown{
+
+position:relative;
+
+display:inline-block;
+
+}
+
+.dropbtn{
+
+background:none;
+
+border:none;
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+padding:10px;
+
+}
+
+.dropdown-content{
+
+display:none;
+
+position:absolute;
+
+background:white;
+
+min-width:150px;
+
+}
+
+.dropdown-content a{
+
+color:black;
+
+display:block;
+
+padding:10px;
+
+text-decoration:none;
+
+}
+
+.dropdown-content a:hover{
+
+background:#eee;
+
+}
+
+.dropdown:hover .dropdown-content{
+
+display:block;
+
+}
+
+
+/* 首页标题 */
+
+.hero{
+
+margin-top:120px;
+
+}
+
+.hero h1{
+
+font-size:60px;
+
+margin-bottom:10px;
+
+}
+
+.hero p{
+
+font-size:20px;
+
+}
+
+
+/* 功能卡片 */
+
+.cards{
+
+display:flex;
+
+justify-content:center;
+
+margin-top:80px;
+
+gap:40px;
+
+}
+
+.card{
+
+width:220px;
+
+padding:30px;
+
+background:rgba(0,0,0,0.7);
+
+border-radius:10px;
+
+text-decoration:none;
+
+color:white;
+
+transition:0.3s;
+
+}
+
+.card:hover{
+
+transform:scale(1.1);
+
+background:#444;
+
+}
+
+#imageViewer{
+
+display:none;
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:black;
+
+justify-content:center;
+align-items:center;
+
+z-index:999;
+
+}
+
+#imageViewer img{
+
+max-width:95%;
+max-height:95%;
+
+object-fit:contain;
+
+}
+
+.page-title{
+
+margin-top:40px;
+
+font-size:40px;
+color:rgb(10, 78, 4);
+
+}
+
+.searchBox{
+
+margin:20px;
+
+}
+
+.searchBox input{
+
+padding:8px;
+
+font-size:16px;
+
+}
+
+.searchBox button{
+
+padding:8px 15px;
+
+background:#333;
+
+color:white;
+
+border:none;
+
+cursor:pointer;
+
+}
+
+.searchBox button:hover{
+
+background:#555;
+
+}
+
+.addBox{
+
+margin:20px;
+
+}
+
+.addBox input{
+
+padding:8px;
+
+margin:5px;
+
+font-size:16px;
+
+}
+
+.addBox button{
+
+padding:8px 15px;
+
+background:#0077cc;
+
+color:white;
+
+border:none;
+
+cursor:pointer;
+
+}
+
+.addBox button:hover{
+
+background:#005fa3;
+
+}
+
+table{
+
+margin:auto;
+
+margin-top:30px;
+
+border-collapse:collapse;
+
+width:70%;
+
+background:rgba(0,0,0,0.7);
+
+}
+
+th,td{
+
+border:1px solid #ccc;
+
+padding:10px;
+
+}
+
+th{
+
+background:#222;
+
+}
+
+td{
+
+background:rgba(255,255,255,0.1);
+
+}
+
+button{
+
+padding:6px 12px;
+
+margin:3px;
+
+cursor:pointer;
+
+border:none;
+
+background:#444;
+
+color:white;
+
+}
+
+button:hover{
+
+background:#666;
+
+}
+
+.loadout-box{
+
+width:350px;
+
+margin:40px auto;
+
+padding:30px;
+
+background:rgba(0,0,0,0.7);
+
+border-radius:10px;
+
+}
+
+.loadout-box input,
+.loadout-box select{
+
+width:200px;
+
+padding:8px;
+
+font-size:16px;
+
+}
+
+.loadout-box button{
+
+padding:10px 20px;
+
+background:#0077cc;
+
+border:none;
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+.loadout-box button:hover{
+
+background:#005fa3;
+
+}
+
+
+
+
+
+.map-select-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 40px;
+        }
+        .map-select-title {
+            font-size: 32px;
+            color: #ff6600;
+        }
+        .map-card-list {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .map-card {
+            width: 300px;
+            height: 200px;
+            background-color: #222;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .map-card:hover {
+            background-color: #333;
+            border-color: #ff6600;
+            transform: translateY(-5px);
+        }
+        .map-card img {
+            width: 80%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .map-card span {
+            font-size: 18px;
+        }
+
+        /* 地图展示容器样式 */
+        .map-container {
+            display: none;
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #map-image {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 102, 0, 0.8);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 99;
+        }
+
+        /* 点位标记样式 */
+        .location-marker {
+            position: absolute;
+            color: #fff;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+        .location-marker:hover {
+            background: rgba(255, 102, 0, 0.8);
+            transform: scale(1.1);
+        }
+
+        /* 弹窗样式 */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            border: 2px solid #ff6600;
+            border-radius: 8px;
+            padding: 20px;
+            z-index: 1000;
+            max-width: 800px;
+            width: 90%;
+        }
+        .popup-content {
+            text-align: center;
+            color: #fff;
+        }
+        .popup-content img {
+            max-width: 100%;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
