@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>地图选择 - 零号大坝 & 航天基地</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="map-page">
+
+    <div class="navbar">
+
+    <div class="logo">DELTA FORCE DATABASE</div>
+
+    <div class="navlinks">
+
+    <a href="index.html">首页</a>
+
+    <div class="dropdown">
+    <button class="dropbtn">武器系统</button>
+    <div class="dropdown-content">
+    <a href="weapons.html">武器数据库</a>
+    <a href="loadout.html">装备搭配</a>
+    </div>
+    </div>
+
+    <div class="dropdown">
+    <button class="dropbtn">战术系统</button>
+    <div class="dropdown-content">
+    <a href="map.html">战术地图</a>
+    </div>
+    </div>
+
+    </div>
+
+    </div>
+
+    <!-- 地图选择界面 -->
+    <div class="map-select-container" id="mapSelect">
+        <h1 class="map-select-title">选择地图</h1>
+        <div class="map-card-list">
+            <!-- 零号大坝卡片 -->
+            <div class="map-card" onclick="showMap('linghaodaba')">
+                <img src="linghaodaba_cover.jpg" alt="零号大坝封面">
+                <span>零号大坝</span>
+            </div>
+            <!-- 航天基地卡片 -->
+            <div class="map-card" onclick="showMap('hangtianjidi')">
+                <img src="hangtianjidi_cover.jpg" alt="航天基地封面">
+                <span>航天基地</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 地图展示容器 -->
+    <div class="map-container" id="mapDisplay">
+        <button class="back-btn" onclick="backToSelect()">返回地图选择</button>
+        <img id="map-image" src="" alt="地图">
+        <!-- 点位标记会通过JS动态生成 -->
+    </div>
+
+    <!-- 弹窗和遮罩层 -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <span class="close-btn" id="closePopup">&times;</span>
+        <div class="popup-content" id="popupContent"></div>
+    </div>
+
+    <script>
+        // 所有地图的点位数据（拼音命名PNG）
+        const mapData = {
+            // 零号大坝数据
+            linghaodaba: {
+                mainImage: "linghaodaba.png",
+                locations: {
+                    "军营": {
+                        image: "junying.png",
+                        description: "军营位于地图西侧，有5个物资点，主要产出电子物品。",
+                        position: { top: "20%", left: "30%" }
+                    },
+                    "水泥厂": {
+                        image: "shuinichang.png",
+                        description: "水泥厂是全图物资点密集的区域，有19个固定物资点，主产工具材料。",
+                        position: { top: "35%", left: "28%" }
+                    },
+                    "大变电站": {
+                        image: "dabiandianzhan.png",
+                        description: "主变电站（大变电站）位于东侧中部资源丰富。",
+                        position: { top: "45%", left: "55%" }
+                    },
+                    "小变电站": {
+                        image: "xiaobiandianzhan.png",
+                        description: "备用电站（小变电站）位于大变电站东侧，包含7个物资点。",
+                        position: { top: "70%", left: "58%" }
+                    },
+                    "游客中心": {
+                        image: "youkezhongxin.png",
+                        description: "游客中心位于地图最右侧，房间内常有惊喜。",
+                        position: { top: "65%", left: "70%" }
+                    },
+                    "行政楼": {
+                        image: "xingzhenglou.png",
+                        description: "行政楼是零号大坝最富有的区域。",
+                        position: { top: "25%", left: "52%" }
+                    }
+                }
+            },
+            // 航天基地数据
+            hangtianjidi: {
+                mainImage: "hangtianjidi.png",
+                locations: {
+                    "蓝室": {
+                        image: "lanshi.png",
+                        description: "蓝室是航天基地高价值物资区，注意二楼的桌子。",
+                        position: { top: "33%", left: "50%" }
+                    },
+                    "黑室": {
+                        image: "heishi.png",
+                        description: "黑室是链接蓝室和总裁的房间，在这里注意低头。",
+                        position: { top: "44%", left: "50%" }
+                    },
+                    "浮力": {
+                        image: "fuli.png",
+                        description: "浮力区域包含一个垂直向下的浮力测试深洞，注意安全。",
+                        position: { top: "33%", left: "43%" }
+                    },
+                    "离心": {
+                        image: "lixin.png",
+                        description: "离心区域有旋转机械结构，注意桌子上的透明反光点。",
+                        position: { top: "44%", left: "43%" }
+                    },
+                    "总裁": {
+                        image: "zongcai.png",
+                        description: "总裁办公室是航天基地核心区域，捡到房卡一定要放进保险哦。",
+                        position: { top: "40%", left: "48%" }
+                    },
+                    "撤离点": {
+                        image: "chelidian.png",
+                        description: "航天基地主要撤离点。",
+                        position: { top: "55%", left: "48%" }
+                    },
+                    "发射区": {
+                        image: "fashequ.png",
+                        description: "发射区有火箭发射台，你在这里可以是飞升者，也可以是勇敢者。",
+                        position: { top: "76%", left: "39%" }
+                    }
+                }
+            }
+        };
+
+        // 全局变量
+        const mapSelectEl = document.getElementById('mapSelect');
+        const mapDisplayEl = document.getElementById('mapDisplay');
+        const mapImageEl = document.getElementById('map-image');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+        const popupContent = document.getElementById('popupContent');
+        const closeBtn = document.getElementById('closePopup');
+        let currentMap = '';
+
+        // 显示指定地图
+        function showMap(mapKey) {
+            // 隐藏选择界面，显示地图界面
+            mapSelectEl.style.display = 'none';
+            mapDisplayEl.style.display = 'block';
+            currentMap = mapKey;
+
+            const mapInfo = mapData[mapKey];
+            // 设置主地图图片
+            mapImageEl.src = mapInfo.mainImage;
+            mapImageEl.alt = mapKey === 'linghaodaba' ? '零号大坝' : '航天基地';
+
+            // 清空原有点位
+            const oldMarkers = document.querySelectorAll('.location-marker');
+            oldMarkers.forEach(marker => marker.remove());
+
+            // 生成新点位
+            Object.keys(mapInfo.locations).forEach(locationName => {
+                const location = mapInfo.locations[locationName];
+                const marker = document.createElement('div');
+                marker.className = 'location-marker';
+                marker.dataset.location = locationName;
+                marker.style.top = location.position.top;
+                marker.style.left = location.position.left;
+                marker.textContent = locationName;
+                
+                // 绑定点击事件
+                marker.addEventListener('click', () => {
+                    popupContent.innerHTML = `
+                        <h2>${locationName}</h2>
+                        <img src="${location.image}" alt="${locationName}">
+                        <p>${location.description}</p>
+                    `;
+                    popup.style.display = 'block';
+                    overlay.style.display = 'block';
+                });
+
+                mapDisplayEl.appendChild(marker);
+            });
+        }
+
+        // 返回地图选择界面
+        function backToSelect() {
+            mapDisplayEl.style.display = 'none';
+            mapSelectEl.style.display = 'flex';
+            currentMap = '';
+        }
+
+        // 关闭弹窗
+        closeBtn.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+        overlay.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

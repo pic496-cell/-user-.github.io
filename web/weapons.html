@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>武器数据库</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="weapon-page">
+
+<!-- 导航栏 -->
+<div class="navbar">
+
+<div class="logo">DELTA FORCE DATABASE</div>
+
+<div class="navlinks">
+
+<a href="index.html">首页</a>
+
+<div class="dropdown">
+<button class="dropbtn">武器系统</button>
+<div class="dropdown-content">
+<a href="weapons.html">武器数据库</a>
+<a href="loadout.html">装备搭配</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button class="dropbtn">战术系统</button>
+<div class="dropdown-content">
+<a href="map.html">战术地图</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<h1 class="page-title">武器数据库</h1>
+
+
+<div class="searchBox">
+
+<input id="search" placeholder="搜索武器">
+<button onclick="searchWeapon()">搜索</button>
+
+</div>
+
+
+<h3>添加武器</h3>
+
+<div class="addBox">
+
+<input id="name" placeholder="名称">
+<input id="type" placeholder="类型">
+<input id="damage" placeholder="伤害">
+
+<button onclick="addWeapon()">添加</button>
+
+</div>
+
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>名称</th>
+<th>类型</th>
+<th>伤害</th>
+<th>操作</th>
+</tr>
+</thead>
+
+<tbody id="weaponTable"></tbody>
+
+</table>
+
+
+<!-- 全屏图片查看 -->
+<div id="imageViewer" onclick="closeImage()">
+<img id="weaponImage">
+</div>
+
+
+<script src="weapons.js"></script>
+
+</body>
+</html>
